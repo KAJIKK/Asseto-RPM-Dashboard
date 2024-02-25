@@ -12,8 +12,10 @@ import serial
 
 
 ##########CONFIG###########
-NUM_LEDS = 60
-MAXRPM = 9000
+MAX_LEDS = 60
+IDLE_LEDS = 5
+MAX_RPM = 18000
+IDLE_RPM = 4000
 
 PORT = "COM19"
 ###########################
@@ -85,7 +87,7 @@ def acUpdate(deltaT):
         timer += deltaT
         return
 
-    rpmForArduino = str(int(map_range(rpm, 0, MAXRPM, 0, NUM_LEDS))) + "\n"
+    rpmForArduino = str(int(map_range(rpm, IDLE_RPM, MAX_RPM, IDLE_LEDS, MAX_LEDS))) + "\n"
     ac.setText(rpmForArdLabel, "LEDs: {}".format(rpmForArduino))
 
     if ser is None or not ser.isOpen():
